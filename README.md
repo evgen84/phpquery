@@ -1,4 +1,9 @@
-## phpQuery, one more fork!
+## phpQuery, one of many forks!
+
+This one is installable via compser:
+```
+composer require electrolinux/phpquery
+```
 
 **Note:** _I haven't used this package since many years, and just recently looked at the code: this is scary, buggy and unfinished. Please don't use it on any production server!_
 
