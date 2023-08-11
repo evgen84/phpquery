@@ -1,4 +1,11 @@
-## phpQuery, one more fork!
+## phpQuery, one of many forks!
+
+This one is installable via compser:
+```
+composer require electrolinux/phpquery
+```
+
+**Note:** _I haven't used this package since many years, and just recently looked at the code: this is scary, buggy and unfinished. Please don't use it on any production server!_
 
 My intent is to have it easily integrated in differents projects, so available on packagist.
 I've gathered some fix and new features here and there, as will keep looking for new stuff on github about phpQuery
@@ -12,13 +19,16 @@ I've gathered some fix and new features here and there, as will keep looking for
 ### github repos i've looked at:
 
 * https://github.com/denis-isaev/phpquery
-* https://github.com/fmorrow/pQuery--PHPQuery- (big project so far)
 * https://github.com/r-sal/phpquery
 * https://github.com/damien-list/phpquery-1
 * https://github.com/nev3rm0re/phpquery
 * https://github.com/Aurielle/phpquery
 * https://github.com/kevee/phpquery (include php-css-parser)
 * https://github.com/lucassouza1/phpquery
+
+## Manual
+
+* [Manual](wiki/README.md) imported from http://code.google.com/p/phpquery/wiki
 
 ## Extracts from fmorrow README.md:
 

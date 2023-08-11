@@ -316,8 +316,6 @@ class DOMDocumentWrapper {
 	}
 
 	protected function contentTypeToArray($contentType) {
-        $test = null;
-        $test =
 		$matches = explode(';', trim(strtolower($contentType)));
 		if (isset($matches[1])) {
 			$matches[1] = explode('=', $matches[1]);
@@ -353,7 +351,7 @@ class DOMDocumentWrapper {
 		return $contentType[1];
 	}
 	protected function charsetFromXML($markup) {
-		$matches;
+		$matches = array();
 		// find declaration
 		preg_match('@<'.'?xml[^>]+encoding\\s*=\\s*(["|\'])(.*?)\\1@i',
 			$markup, $matches
