@@ -313,7 +313,7 @@ class phpQueryObject
 		// TODO include this inside parsing ?
 		$query = trim(
 			preg_replace('@\s+@', ' ',
-				preg_replace('@\s*(>|\\+|~)\s*@', '\\1', $query)
+				preg_replace('@\s*(>|\\+|~)\s*@', '\\1', $query ?? '')
 			)
 		);
 		$queries = array(array());
@@ -1037,7 +1037,7 @@ class phpQueryObject
 				if (! $param)
 					break;
 					// nth-child(n+b) to nth-child(1n+b)
-				if ($param{0} == 'n')
+				if ($param[0] == 'n')
 					$param = '1'.$param;
 				// :nth-child(index/even/odd/equation)
 				if ($param == 'even' || $param == 'odd')
@@ -1052,17 +1052,17 @@ class phpQueryObject
 								return null;'),
 						new CallbackParam(), $param
 					);
-				else if (mb_strlen($param) > 1 && $param{1} == 'n')
+				else if (mb_strlen($param) > 1 && $param[1] == 'n')
 					// an+b
 					$mapped = $this->map(
 						create_function('$node, $param',
 							'$prevs = pq($node)->prevAll()->size();
 							$index = 1+$prevs;
 							$b = mb_strlen($param) > 3
-								? $param{3}
+								? $param[3]
 								: 0;
-							$a = $param{0};
-							if ($b && $param{2} == "-")
+							$a = $param[0];
+							if ($b && $param[2] == "-")
 								$b = -$b;
 							if ($a > 0) {
 								return ($index-$b)%$a == 0
@@ -1663,9 +1663,11 @@ class phpQueryObject
 	 * @return phpQueryObject|QueryTemplatesSource|QueryTemplatesParse|QueryTemplatesSourceQuery
 	 * @deprecated Use length as attribute
 	 */
+    #[\ReturnTypeWillChange]
 	public function length() {
 		return $this->size();
 	}
+    #[\ReturnTypeWillChange]
 	public function count() {
 		return $this->size();
 	}
@@ -1878,7 +1880,7 @@ class phpQueryObject
 	}
 	/**
 	 * Enter description here...
-	 * 
+	 *
 	 * @param $code
 	 * @return unknown_type
 	 */
@@ -1889,7 +1891,7 @@ class phpQueryObject
 	}
 	/**
 	 * Enter description here...
-	 * 
+	 *
 	 * @param $code
 	 * @return unknown_type
 	 */
@@ -2264,7 +2266,7 @@ class phpQueryObject
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * @return The text content of each matching element, like
 	 * text() but returns an array with one entry per matched element.
@@ -2277,7 +2279,7 @@ class phpQueryObject
 		}
 		return $results;
 	}
-	
+
 	/**
 	 * Enter description here...
 	 *
@@ -2645,7 +2647,7 @@ class phpQueryObject
 		return is_null($value)
 			? '' : $this;
 	}
-	
+
 	/**
 	 * @return The same attribute of each matching element, like
 	 * attr() but returns an array with one entry per matched element.
@@ -2949,7 +2951,7 @@ class phpQueryObject
 	}
 	/**
 	 * Enter description here...
-	 * 
+	 *
 	 * @param <type> $key
 	 * @param <type> $value
 	 */
@@ -2966,7 +2968,7 @@ class phpQueryObject
 	}
 	/**
 	 * Enter description here...
-	 * 
+	 *
 	 * @param <type> $key
 	 */
 	public function removeData($key) {
@@ -2980,6 +2982,7 @@ class phpQueryObject
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function rewind(){
 		$this->debug('iterating foreach');
 //		phpQuery::selectDocument($this->getDocumentID());
@@ -2995,12 +2998,14 @@ class phpQueryObject
 	/**
    * @access private
 	 */
-	public function current(){
+    #[\ReturnTypeWillChange]
+	public function current() {
 		return $this->elementsInterator[ $this->current ];
 	}
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function key(){
 		return $this->current;
 	}
@@ -3015,7 +3020,8 @@ class phpQueryObject
 	 * @see phpQueryObject::_next()
 	 * @return phpQueryObject|QueryTemplatesSource|QueryTemplatesParse|QueryTemplatesSourceQuery
 	 */
-	public function next($cssSelector = null){
+    #[\ReturnTypeWillChange]
+	public function next($cssSelector = null) {
 //		if ($cssSelector || $this->valid)
 //			return $this->_next($cssSelector);
 		$this->valid = isset( $this->elementsInterator[ $this->current+1 ] )
@@ -3032,6 +3038,7 @@ class phpQueryObject
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function valid(){
 		return $this->valid;
 	}
@@ -3040,18 +3047,21 @@ class phpQueryObject
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function offsetExists($offset) {
 		return $this->find($offset)->size() > 0;
 	}
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function offsetGet($offset) {
 		return $this->find($offset);
 	}
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function offsetSet($offset, $value) {
 //		$this->find($offset)->replaceWith($value);
 		$this->find($offset)->html($value);
@@ -3059,6 +3069,7 @@ class phpQueryObject
 	/**
    * @access private
 	 */
+    #[\ReturnTypeWillChange]
 	public function offsetUnset($offset) {
 		// empty
 		throw new Exception("Can't do unset, use array interface only for calling queries and replacing HTML.");
