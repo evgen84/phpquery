@@ -512,7 +512,7 @@ class DOMDocumentWrapper {
 	 * @param $markup
 	 * @return $document
 	 */
-	private function documentFragmentLoadMarkup($fragment, $charset, $markup = null) {
+	private function documentFragmentLoadMarkup($fragment, $charset, $markup = '') {
 		// TODO error handling
 		// TODO copy doctype
 		// tempolary turn off
